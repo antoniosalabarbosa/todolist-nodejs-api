@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose";
 
 const Task = model("tasks", (
-    new Schema({ value: String })
+    new Schema({ task: String })
 ));
 
 export { Task };
