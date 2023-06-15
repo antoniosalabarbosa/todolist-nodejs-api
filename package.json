@@ -1,0 +1,39 @@
+{
+  "name": "todolist-nodejs-api",
+  "version": "1.0.0",
+  "description": "A simple backend application to NoSQL database connect",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antoniosalabarbosa/todolist-nodejs-api.git"
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "api",
+    "express",
+    "connect",
+    "database",
+    "mongodb",
+    "mongo",
+    "mongoose"
+  ],
+  "author": "Antonio Sala Barbosa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/antoniosalabarbosa/todolist-nodejs-api/issues"
+  },
+  "homepage": "https://github.com/antoniosalabarbosa/todolist-nodejs-api#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
