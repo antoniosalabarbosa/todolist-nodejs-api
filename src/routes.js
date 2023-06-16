@@ -28,11 +28,11 @@ ROUTES.post(BASE_ROUTE, async(req, res)=>{
 ROUTES.put(`${BASE_ROUTE}/:id`, async (req, res)=>{
     try{
         const { id } = req.params;
-        const { value } = await req.body;
+        const { task } = await req.body;
 
         await Task.updateOne(
             { _id: id },
-            { $set: { value: value} }
+            { $set: { task: task} }
         );
     }
     catch(error){ console.log(error, "DB: Error in 'put task' method") };
