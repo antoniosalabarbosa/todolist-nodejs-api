@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router, application } from "express";
 import { Task } from "./database/Models.js";
 
 const ROUTES = Router();
@@ -14,6 +14,16 @@ ROUTES.get(BASE_ROUTE, async (req, res)=>{
     res.json(getTasks);
 });
 
+ROUTES.get(`${BASE_ROUTE}/:id`, async (req, res) =>{
+    try{
+        const { id } = req.params;
+        const task = await Task.findOne({ _id: id});
+        res.header("Content-Type", "application/json");
+        res.json(task);
+    }
+    catch(err){ console.log(err) }
+});
+
 ROUTES.post(BASE_ROUTE, async(req, res)=>{
     const newTask = (new Task({
         value: req.body.value
@@ -27,12 +37,11 @@ ROUTES.post(BASE_ROUTE, async(req, res)=>{
 
 ROUTES.put(`${BASE_ROUTE}/:id`, async (req, res)=>{
     try{
-        const { id } = req.params;
-        const { task } = await req.body;
+        const { id, task } = req.body;
 
         await Task.updateOne(
             { _id: id },
-            { $set: { task: task} }
+            { $set: { task: task } }
         );
     }
     catch(error){ console.log(error, "DB: Error in 'put task' method") };
