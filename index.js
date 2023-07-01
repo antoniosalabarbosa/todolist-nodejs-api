@@ -6,7 +6,7 @@ import ROUTES from "./src/routes.js";
 const APP = express();
 const PORT = 3001;
 
-// Edit the Cors access
+// Edit cors access
 APP.use(cors());
 APP.use(express.json());
 APP.use(ROUTES);
