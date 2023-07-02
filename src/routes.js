@@ -19,9 +19,9 @@ ROUTES.get(BASE_ROUTE, async (req, res)=>{
     res.end();
 });
 
-ROUTES.get(`${BASE_ROUTE}/:id`, async (req, res) =>{
+ROUTES.get(`${BASE_ROUTE}`, async (req, res) =>{
     try{
-        const { id } = req.params;
+        const { id } = req.body;
         const task = await Task.findOne({ _id: id});
         res.header("Content-Type", "application/json");
         res.json(task);
@@ -34,7 +34,8 @@ ROUTES.get(`${BASE_ROUTE}/:id`, async (req, res) =>{
 
 ROUTES.post(BASE_ROUTE, async(req, res)=>{
     const newTask = (new Task({
-        value: req.body.value
+        task: req.body.task,
+        checked: req.body.checked,
     }));
 
     try{
@@ -48,9 +49,12 @@ ROUTES.post(BASE_ROUTE, async(req, res)=>{
 
 ROUTES.put(`${BASE_ROUTE}`, async (req, res)=>{
     try{
-        const { id, task } = req.body;
+        const { id, task, checked } = req.body;
 
-        await Task.findByIdAndUpdate(id, {task: task});
+        await Task.findByIdAndUpdate(id, {
+            task: task, 
+            checked: checked
+        });
 
         req.pause();
         res.end();
@@ -58,9 +62,9 @@ ROUTES.put(`${BASE_ROUTE}`, async (req, res)=>{
     catch(error){ console.log(error, "DB: Error in 'put task' method") };
 });
 
-ROUTES.delete(`${BASE_ROUTE}/:id`, async (req, res)=>{
+ROUTES.delete(`${BASE_ROUTE}`, async (req, res)=>{
     try{
-        const { id } = req.params;
+        const { id } = req.body;
 
         await Task.deleteOne( { _id: id } );
 
